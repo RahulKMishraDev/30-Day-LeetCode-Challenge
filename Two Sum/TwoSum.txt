@@ -1,0 +1,86 @@
+
+# TwoSum Solution
+
+## Description
+
+This repository contains a solution to the classic "Two Sum" problem, where the goal is to find two numbers in an array that add up to a specific target value. The solution is implemented in Java using a hash map to achieve efficient lookups.
+
+## Problem Statement
+
+Given an array of integers `nums` and an integer `target`, return the indices of the two numbers such that they add up to `target`. You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+## Solution Approach
+
+The solution leverages a hash map to track the indices of the elements as we iterate through the array. This allows us to check if the complement (the number needed to reach the target) exists efficiently.
+
+### Steps to Solve
+
+1. **Initialize Data Structures:**
+   - Create an integer array `result` of size 2 to store the indices of the two numbers.
+   - Create a `HashMap` to store each number and its index from the `nums` array.
+
+2. **Iterate Through the Array:**
+   - For each element in the array, compute the complement needed to reach the target sum by subtracting the current element from the target.
+
+3. **Check for the Complement:**
+   - If the complement exists in the hash map, the current number and the complement sum up to the target.
+   - Retrieve the index of the complement from the hash map and store both indices (current index and the index of the complement) in the `result` array.
+   - Return the `result` array immediately after finding the pair.
+
+4. **Update the HashMap:**
+   - If the complement is not found, add the current number and its index to the hash map for future reference.
+
+5. **Return the Result:**
+   - If no pair is found, return the `result` array. (Note: The problem guarantees exactly one solution.)
+
+## Code
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+class TwoSum {
+    public int[] twoSum(int[] nums, int target) {
+        int result[] = new int[2];
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                result[1] = i;
+                result[0] = map.get(target - nums[i]);
+                return result;
+            }
+            map.put(nums[i], i);
+        }
+        return result;
+    }
+}
+```
+
+## Usage
+
+1. **Compile the Code:**
+   ```bash
+   javac TwoSum.java
+   ```
+
+2. **Run the Program:**
+   You can create a test class or use a main method to test the `twoSum` function with different inputs.
+
+3. **Example:**
+   ```java
+   public class Main {
+       public static void main(String[] args) {
+           TwoSum solution = new TwoSum();
+           int[] nums = {2, 7, 11, 15};
+           int target = 9;
+           int[] result = solution.twoSum(nums, target);
+           System.out.println("Indices: " + result[0] + ", " + result[1]); // Output: Indices: 0, 1
+       }
+   }
+   ```
+
+## Complexity
+
+- **Time Complexity:** O(n), where `n` is the number of elements in the `nums` array. Each element is processed once, and hash map operations are average O(1).
+- **Space Complexity:** O(n), the space used by the hash map.
+
