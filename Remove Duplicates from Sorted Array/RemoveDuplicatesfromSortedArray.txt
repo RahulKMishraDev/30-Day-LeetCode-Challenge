@@ -1,0 +1,21 @@
+Approach: Two-Pointer Technique
+
+Initialize Pointers:
+Start with two pointers: i (slow pointer) initialized to 0 and j (fast pointer) initialized to 1. The pointer i will keep track of the position of the last unique element, while j will iterate through the array.
+
+Iterate Through the Array:
+Start iterating through the array with j from the second element (index 1) to the end of the array.
+For each element at index j, compare it with the element at index i.
+
+Check for Duplicates:
+If nums[j] is different from nums[i], it means a new unique element is found. Increment i by 1, and then move the element at j to the position i.
+If nums[j] is the same as nums[i], it means it's a duplicate, and you can simply move on to the next element by incrementing j.
+
+Return the Count of Unique Elements:
+After the loop ends, i + 1 will be the number of unique elements in the array. Return this value.
+
+Time Complexity:
+The time complexity of this approach is O(n), where n is the length of the array. This is because we only traverse the array once.
+
+Space Complexity:
+The space complexity is O(1) since we are modifying the array in place without using any extra space.
