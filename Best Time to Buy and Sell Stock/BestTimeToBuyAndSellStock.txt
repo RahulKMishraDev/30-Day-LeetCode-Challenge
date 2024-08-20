@@ -1,0 +1,60 @@
+### Approach: Single Pass
+
+The problem asks to find the maximum profit that can be achieved by buying and selling a stock given its prices over a number of days. The key here is to minimize the buying price and maximize the selling price, ensuring that the selling happens after the buying.
+
+Here's a detailed breakdown of the approach:
+
+1. **Initialize Variables**:
+    - `minprice`: Initialize it to a very large number (`Integer.MAX_VALUE`) to ensure that any price in the array will be less than this initial value. This variable will store the minimum price encountered so far as you iterate through the array.
+    - `maxprofit`: Initialize it to 0. This variable will store the maximum profit that can be made by selling the stock after buying it at the `minprice`.
+
+2. **Iterate Through the Prices**:
+    - For each day's price in the array:
+        - **Update `minprice`**: If the current day's price is less than the current `minprice`, update `minprice` to this price. This ensures that you are always considering the lowest possible price to buy the stock.
+        - **Calculate Profit**: If selling the stock on the current day (i.e., `prices[i] - minprice`) would give a profit greater than the current `maxprofit`, update `maxprofit` to this new profit.
+  
+3. **Return the Result**:
+    - After iterating through the array, `maxprofit` will hold the maximum profit that can be achieved, or 0 if no profit is possible (i.e., prices are in decreasing order).
+
+### Code Implementation
+
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        int minprice = Integer.MAX_VALUE;
+        int maxprofit = 0;
+        
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minprice) {
+                minprice = prices[i];  // Update the minimum price
+            } else if (prices[i] - minprice > maxprofit) {
+                maxprofit = prices[i] - minprice;  // Update the maximum profit
+            }
+        }
+        
+        return maxprofit;
+    }
+}
+```
+
+### Example Walkthrough
+
+Let's take the example `prices = [7,1,5,3,6,4]`:
+
+- Initialize `minprice = Integer.MAX_VALUE`, `maxprofit = 0`.
+- On the 1st day (`i = 0`), price is `7`. Update `minprice` to `7`.
+- On the 2nd day (`i = 1`), price is `1`. Update `minprice` to `1`.
+- On the 3rd day (`i = 2`), price is `5`. Profit if sold today: `5 - 1 = 4`. Update `maxprofit` to `4`.
+- On the 4th day (`i = 3`), price is `3`. No profit update since `3 - 1 = 2` is less than `4`.
+- On the 5th day (`i = 4`), price is `6`. Profit if sold today: `6 - 1 = 5`. Update `maxprofit` to `5`.
+- On the 6th day (`i = 5`), price is `4`. No profit update since `4 - 1 = 3` is less than `5`.
+
+Final output: `maxprofit = 5`.
+
+### Time Complexity
+
+- The solution iterates through the list of prices only once, so the time complexity is **O(n)**, where `n` is the number of days.
+
+### Space Complexity
+
+- The solution uses a constant amount of extra space, so the space complexity is **O(1)**.
