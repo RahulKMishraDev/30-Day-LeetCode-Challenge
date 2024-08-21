@@ -1,4 +1,4 @@
-class Solution {
+class BestTimeToBuyAndSellStock {
     public int maxProfit(int[] prices) {
         int minprice =Integer.MAX_VALUE;
         int maxprofit=0;
