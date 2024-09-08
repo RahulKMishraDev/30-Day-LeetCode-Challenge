@@ -1,5 +1,5 @@
 import java.util.*;
-class Solution {
+class IntersectionofTwoArraysII {
     public int[] intersect(int[] nums1, int[] nums2) {
         HashMap<Integer, Integer> map = new HashMap<>();
         for (int num : nums1) {
